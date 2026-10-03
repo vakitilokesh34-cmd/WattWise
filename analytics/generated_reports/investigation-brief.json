@@ -1,0 +1,34 @@
+{
+  "title": "WATTWISE ENERGY INVESTIGATION BRIEF",
+  "building": "Block A",
+  "period": "10:00 PM – 12:00 AM",
+  "expectedConsumptionKwh": 100.0,
+  "actualConsumptionKwh": 180.0,
+  "excessKwh": 80.0,
+  "estimatedExcessCost": 640.0,
+  "observation": "Consumption exceeded the learned expected baseline.",
+  "evidence": [
+    "Actual consumption exceeded expected consumption by 80 kWh.",
+    "The anomaly lasted approximately 2 hours.",
+    "The deviation occurred between 10:00 PM and 12:00 AM.",
+    "Estimated Excess Cost is ₹640.00."
+  ],
+  "possibleFactorsToInvestigate": [
+    "Possible factor to investigate: HVAC schedules.",
+    "Possible factor to investigate: Lighting schedules.",
+    "Possible factor to investigate: Equipment operating hours.",
+    "Possible factor to investigate: Extended building operation.",
+    "Possible factor to investigate: Unexpected occupancy.",
+    "Possible factor to investigate: Meter/data quality."
+  ],
+  "recommendedChecks": [
+    "Compare HVAC schedules and operating logs with the anomaly period.",
+    "Review lighting schedules and control logs for the anomaly period.",
+    "Check equipment operating hours against the expected schedule.",
+    "Confirm whether building operating hours changed during this period.",
+    "Compare occupancy records, if available, with the anomaly period.",
+    "Review meter readings and data completeness for this period."
+  ],
+  "disclaimer": "This analysis identifies unusual consumption patterns. It does not establish the physical cause of the anomaly.",
+  "anomalyId": "AN-024"
+}
