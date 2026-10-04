@@ -1,0 +1,272 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────────────────────────
+   Base
+   ───────────────────────────────────────────────────────────── */
+@layer base {
+  :root {
+    --surface-1: 10 15 27;
+    --surface-2: 14 21 35;
+    --stroke: 37 49 72;
+    --flux: 34 211 238;
+    --font-sans: 'Inter var', Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Consolas, monospace;
+
+    color-scheme: dark;
+  }
+
+  * {
+    @apply border-white/5;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scrollbar-gutter: stable;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-base-950 text-ink-100 font-sans antialiased;
+    /* Prevent horizontal overflow on every breakpoint (requirement §15). */
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'ss01';
+    background-image:
+      radial-gradient(90% 60% at 12% -10%, rgba(34, 211, 238, 0.1) 0%, transparent 60%),
+      radial-gradient(70% 50% at 96% 4%, rgba(139, 92, 246, 0.09) 0%, transparent 62%);
+    background-attachment: fixed;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-semibold tracking-[-0.015em] text-ink-50;
+  }
+
+  /* Numeric readouts stay aligned while animating. */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum';
+  }
+
+  ::selection {
+    background: rgba(34, 211, 238, 0.28);
+    color: #f5f8ff;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-flux-400/70 ring-offset-2 ring-offset-base-950;
+  }
+
+  /* Scrollbars */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--stroke)) transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--stroke) / 0.9);
+    border-radius: 999px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(55, 69, 95, 0.95);
+    background-clip: content-box;
+  }
+
+  canvas {
+    display: block;
+    touch-action: none;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Components — glass surfaces
+   ───────────────────────────────────────────────────────────── */
+@layer components {
+  .glass {
+    @apply relative rounded-2xl border border-white/[0.07] bg-white/[0.028] shadow-glass backdrop-blur-xl;
+  }
+
+  /* Top luminous hairline — the "premium" tell. */
+  .glass::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    border-radius: inherit;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.16) 18%,
+      rgba(34, 211, 238, 0.32) 50%,
+      rgba(255, 255, 255, 0.16) 82%,
+      transparent
+    );
+    pointer-events: none;
+  }
+
+  .glass-strong {
+    @apply relative rounded-2xl border border-white/[0.09] bg-base-850/70 shadow-glass backdrop-blur-2xl;
+  }
+
+  .glass-hover {
+    @apply transition duration-300 ease-spring hover:border-flux-400/25 hover:bg-white/[0.05];
+  }
+
+  .panel-title {
+    @apply text-2xs font-semibold uppercase tracking-[0.18em] text-ink-400;
+  }
+
+  .label-muted {
+    @apply text-2xs font-medium uppercase tracking-[0.14em] text-ink-500;
+  }
+
+  .divider {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent;
+  }
+
+  /* Skeleton shimmer */
+  .skeleton {
+    @apply relative overflow-hidden rounded-lg bg-white/[0.045];
+  }
+
+  .skeleton::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0,
+      rgba(255, 255, 255, 0.07) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    animation: shimmer 1.8s infinite;
+  }
+
+  /* Ambient dot grid used behind hero panels */
+  .dot-grid {
+    background-image: radial-gradient(rgba(148, 163, 196, 0.16) 1px, transparent 1px);
+    background-size: 22px 22px;
+    -webkit-mask-image: radial-gradient(80% 70% at 50% 0%, #000 0%, transparent 78%);
+    mask-image: radial-gradient(80% 70% at 50% 0%, #000 0%, transparent 78%);
+  }
+
+  .hairline-x {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(148, 163, 196, 0.28) 30%,
+      rgba(148, 163, 196, 0.28) 70%,
+      transparent
+    );
+  }
+
+  /* Recharts overrides */
+  .recharts-wrapper .recharts-cartesian-grid line {
+    stroke: rgba(148, 163, 196, 0.1);
+  }
+
+  .recharts-text {
+    fill: #6c7b9f;
+    font-size: 11px;
+  }
+
+  .recharts-surface {
+    overflow: visible;
+  }
+}
+
+@layer utilities {
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 62%, transparent 100%);
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .stack-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Raw keyframes
+
+   Declared outside Tailwind layers so hand-written CSS (and any utility whose
+   keyframe Tailwind tree-shakes away) always has a definition available.
+   ───────────────────────────────────────────────────────────── */
+@keyframes shimmer {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.65;
+  }
+  70%,
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes scan-line {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(400%);
+  }
+}
+
+@keyframes flow-dash {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
+/* Respect user motion preferences globally. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,3 +1,20 @@
+node_modules
+dist
+dist-ssr
+.vite
+*.local
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*
+yarn-error.log*
+.idea
+.vscode/*
+!.vscode/extensions.json
+coverage
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -12,11 +29,3 @@ htmlcov/
 .venv/
 venv/
 env/
-
-# IDE files
-.vscode/
-.idea/
-
-# OS generated
-.DS_Store
-Thumbs.db
